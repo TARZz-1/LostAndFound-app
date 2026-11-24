@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF003DA5),
           brightness: Brightness.light,
-        ),
+        ).copyWith(primary: const Color(0xFF003DA5), onPrimary: Colors.white),
+
         appBarTheme: const AppBarTheme(
           //cambia el color del appbar
           backgroundColor: Color(0xFF003DA5),
