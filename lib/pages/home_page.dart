@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -174,25 +173,36 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert),
+              icon: const Icon(Icons.logout_outlined),
               onSelected: (valor) async {
                 if (valor == 'cerrar') {
                   await _authService.signOut();
                 }
               },
 
-              itemBuilder: (_) => const [
-                PopupMenuItem(value: 'cerrar', child: Text('Cerrar Sesion')),
+              itemBuilder: (_) => [
+                PopupMenuItem(
+                  enabled: false,
+                  child: Text(
+                    user?.email ?? 'Usuario sin correo',
+                    style: const TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+                const PopupMenuDivider(),
+                const PopupMenuItem(
+                  value: 'cerrar',
+                  child: Text('Cerrar Sesion'),
+                ),
               ],
             ),
           ],
           bottom: const TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
-            indicatorColor: Colors.white,
+            indicatorColor: Colors.amberAccent,
             tabs: [
-              Tab(text: 'Todos'),
-              Tab(text: 'Mis publicaciones'),
+              Tab(icon: Icon(Icons.list_alt), text: 'Todos'),
+              Tab(icon: Icon(Icons.person_pin), text: 'Mis publicaciones'),
             ],
           ),
         ),
@@ -226,7 +236,9 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (_) => const PublishItemPage()),
             );
           },
-          icon: const Icon(Icons.add),
+          backgroundColor: Colors.amberAccent,
+          foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
+          icon: const Icon(Icons.add_a_photo_outlined),
           label: const Text('Publicar'),
         ),
       ),

@@ -32,6 +32,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       );
       Navigator.pop(context);
     } catch (error) {
+      debugPrint('Error al actualizar publicacion: $error');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -50,6 +51,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
+          icon: const Icon(Icons.warning_amber_rounded),
           title: const Text('Eliminar publicación'),
           content: const Text('¿Seguro que deseas eliminar esta publicación?'),
           actions: [
@@ -82,6 +84,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           .showSnackBar(const SnackBar(content: Text('Publicación eliminada')));
       Navigator.pop(context);
     } catch (error) {
+      debugPrint('Error al eliminar publicacion: $error');
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(

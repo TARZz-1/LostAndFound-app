@@ -21,7 +21,11 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      await _authService.signInWithGoogle();
+      final resultado = await _authService.signInWithGoogle();
+      if (!mounted) return;
+      if (resultado == null) {
+        setState(() => _mensajeError = 'Inicio de sesion cancelado');
+      }
     } catch (ex) {
       debugPrint('Error en signInWithGoogle: $ex');
       if (!mounted) return;

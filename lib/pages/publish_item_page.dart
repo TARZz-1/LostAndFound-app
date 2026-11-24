@@ -63,6 +63,7 @@ class _PublishItemPageState extends State<PublishItemPage> {
         imagenBytes = bytes;
       });
     } catch (error) {
+      debugPrint('Error al seleccionar imagen: $error');
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -133,6 +134,7 @@ class _PublishItemPageState extends State<PublishItemPage> {
 
       Navigator.pop(context);
     } catch (error) {
+      debugPrint('Error al crear la publicacion: $error');
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
